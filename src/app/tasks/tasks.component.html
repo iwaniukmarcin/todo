@@ -1,38 +1,17 @@
-<div class="col-sm-12 pt-5 text-right">
-    <div class="col-md-12">
-        <div class="edit-popup" *ngIf="show">
-            <input type="text" name="" class="edit-item" value="{{value}}" #item>
-            <button class="btn-primary" (click)="update(item.value)">Update</button>
-      
-          </div>
-          <input type="text" name="" class="item" #item>
-          <button class="btn-primary" (click)="create(item.value)">Add</button>
-    
-  </div>
-  
-  <div class="col-sm-12 pt-2">
-    <div class="col-md-12">
-        <table class="table table-bordered table-hover table-striped">
-            <thead class="table-primary">
-                <tr>
-                    
-                    <th scope="col">Task</th>
-                    <th scope="col">Date</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of mockData">
-                    
-                    <td>{{item.title}}</td>
-                    <td>{{item.date | date: 'shortDate'}}</td>
-                    <td width="150" class="text-center">
-                        <button type="button" class="btn btn-info btn-sm mr-2" (click)="edit(item.id, item.title)">Edit</button> 
-                        <button type="button" class="btn btn-danger btn-sm" (click)="remove(item.id)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="col-sm-12 pt-2">
+    <div class="col-md-12" >
+        <h2>Angular ToDo App</h2>
+            <input type="text" name="" class="item input-lg" #item>
+                <button class="btn btn-info btn-sm mr-2" (click)="create(item.value)">Add new task</button>
+                    <div *ngIf='show' >
+                        <app-task-detail [task]="selectedTask" (close)="onHandleClose()"></app-task-detail>
+                    </div>
+                    <div *ngFor="let date of datagrouped | keys">
+                        <h4>{{date}}</h4><br><hr>
+                            <div *ngFor="let item of datagrouped[date]">{{item.title}}<br> 
+                                <button type="button" class="btn btn-info btn-sm mr-2" (click)="onSelect(item)">Edit</button> 
+                                <button type="button" class="btn btn-danger btn-sm" (click)="remove(item.id)">Delete</button>
+                                <hr>
+                    </div>
     </div>
-  </div>
-  
+</div>
